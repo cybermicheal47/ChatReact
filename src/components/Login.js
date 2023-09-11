@@ -2,7 +2,8 @@ import React from 'react';
 import Loginimg from '../images/login.jpg';
 import { Link ,  useNavigate} from 'react-router-dom';
 import { useState } from "react"
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { toast} from 'react-toastify'
 function Login() {
 
 const[formdata, setformdata] = useState({
@@ -24,6 +25,25 @@ const navigate = useNavigate()
 
 
 
+ 
+
+const onSubmit = async  (e) => {
+  e.preventDefault()
+
+
+  try {
+    const auth =getAuth()
+    const userCredentials =await signInWithEmailAndPassword (auth, email,password)
+    if(userCredentials.user){
+      navigate('/chat')
+    }
+   
+  } catch (error) {
+    toast.error("User Credentials Incorrect")
+     console.log(error)
+  }
+}
+
   return (
     <div>
       <center><h1> Login</h1></center>
@@ -36,7 +56,7 @@ const navigate = useNavigate()
 
     
 
-          <form action="" method="post">
+          <form onSubmit={onSubmit}>
            
 
 

@@ -7,6 +7,8 @@ import { setDoc,doc, serverTimestamp  } from 'firebase/firestore';
 
 import {db} from '../Firebase.config'
 
+import { toast} from 'react-toastify'
+
 
 function Signup() {
 const navigate = useNavigate()
@@ -41,6 +43,7 @@ const onSubmit = async (e) => {
 
 updateProfile(auth.currentUser,{
   displayName: formdata.name ,
+  
 })
 
 
@@ -53,6 +56,7 @@ await setDoc(doc(db, 'users', user.uid), formdatacopy)
 
      navigate('/')
   } catch (error) {
+    toast.error("something went wrong, try again ")
     console.log(error)
     
   }
@@ -82,10 +86,6 @@ await setDoc(doc(db, 'users', user.uid), formdatacopy)
               <input type="email" id="email" name="email" value={formdata.email} onChange={onChange} placeholder="youknow@example.com" required />
             </div>
           
-            <div>
-              <label htmlFor="user_email">Phone Number:</label>
-              <input type="tel" id="tel" name="tel" value={formdata.tel} onChange={onChange} placeholder="+09889998"  />
-            </div>
            
             <label htmlFor="psw"><b>Password (at least six characters)</b></label>
             <input    type="password"
