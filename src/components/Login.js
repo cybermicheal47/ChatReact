@@ -1,8 +1,29 @@
 import React from 'react';
 import Loginimg from '../images/login.jpg';
-import { Link } from 'react-router-dom';
+import { Link ,  useNavigate} from 'react-router-dom';
+import { useState } from "react"
 
 function Login() {
+
+const[formdata, setformdata] = useState({
+  email: '',
+  password: '',
+}) 
+
+const{ email, password} = formdata
+
+
+const navigate = useNavigate()
+ const onChange =(e) => {
+ setformdata((prevstate)=>({
+  ...prevstate, 
+  [e.target.id] : e.target.value,
+
+ }))
+ }
+
+
+
   return (
     <div>
       <center><h1> Login</h1></center>
@@ -21,12 +42,19 @@ function Login() {
 
             <div>
               <label htmlFor="user_email">Email Address:</label>
-              <input type="email" id="user_email" name="email" placeholder="youknow@example.com" />
+              <input type="email" id="email" value={formdata.email} onChange={onChange} name="email" placeholder="youknow@example.com"  />
             </div>
 
 
+
             <label htmlFor="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required />
+            <input    type="password"
+            placeholder="Enter Password"
+            name="password"
+            id="password"
+            value={password}
+            onChange={onChange}
+            required  />
 
             
 

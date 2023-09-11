@@ -1,8 +1,64 @@
 import React from 'react';
 import Signupimg from '../images/signup.jpg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useState } from 'react'
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { setDoc,doc, serverTimestamp  } from 'firebase/firestore';
+
+import {db} from '../Firebase.config'
+
 
 function Signup() {
+const navigate = useNavigate()
+const[formdata, setformdata] = useState({
+  name : '',
+  email: '',
+  password: ''
+})
+
+
+
+
+
+
+const onChange = (e) => {
+  setformdata((prevState) => ({
+    ...prevState,
+    [e.target.id]: e.target.value,
+  }));
+};
+
+
+
+const onSubmit = async (e) => {
+  e.preventDefault()
+
+  try {
+   const auth = getAuth()
+   const usercredentials = await createUserWithEmailAndPassword(auth,formdata.email,formdata.password) 
+
+   const user = usercredentials.user
+
+updateProfile(auth.currentUser,{
+  displayName: formdata.name ,
+})
+
+
+const formdatacopy = {...formdata}
+delete formdatacopy.password
+formdatacopy.timestamp = serverTimestamp()
+await setDoc(doc(db, 'users', user.uid), formdatacopy)
+
+
+
+     navigate('/')
+  } catch (error) {
+    console.log(error)
+    
+  }
+}
+
+
   return (
     <div>
       <center><h1> Create An Account With Us</h1></center>
@@ -15,21 +71,30 @@ function Signup() {
 
     
 
-          <form action="" method="post">
+          <form onSubmit={onSubmit}>
             <label htmlFor="first_name">Full Name:</label>
-            <input type="text" name="fullname" id="fullname" />
+            <input type="text" name="name" id="name"    value={formdata.name}
+            onChange={onChange} />
 
 
             <div>
               <label htmlFor="user_email">Email Address:</label>
-              <input type="email" id="user_email" name="email" placeholder="youknow@example.com" />
+              <input type="email" id="email" name="email" value={formdata.email} onChange={onChange} placeholder="youknow@example.com" required />
             </div>
-
-            <label htmlFor="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number"  />
-
-            <label htmlFor="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required />
+          
+            <div>
+              <label htmlFor="user_email">Phone Number:</label>
+              <input type="tel" id="tel" name="tel" value={formdata.tel} onChange={onChange} placeholder="+09889998"  />
+            </div>
+           
+            <label htmlFor="psw"><b>Password (at least six characters)</b></label>
+            <input    type="password"
+            placeholder="Enter Password"
+            name="password"
+            id="password"
+            value={formdata.password}
+            onChange={onChange}
+            required  />
 
             
 
