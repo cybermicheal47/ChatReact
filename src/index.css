@@ -229,3 +229,36 @@ flex-direction: column;
   background-color: #7cc5d9;
   font-weight: 600;
 }
+
+
+/* Home button styles */
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Text color */
+  text-decoration: none; /* Remove underlines from links */
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  margin-bottom: 10px;
+}
+.redcolor{
+  background-color: red;
+  
+}
+
+.button-link:hover {
+  background-color: #0056b3; /* Hover color */
+}
+
+
+.homepage{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  gap: 2px;
+
+}

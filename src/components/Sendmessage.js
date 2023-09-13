@@ -4,7 +4,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../Firebase.config';
 import { toast } from 'react-toastify';
 
-const Sendmessage = () => {
+const Sendmessage = ({scroll}) => {
   const [sendmsg, setSendmsg] = useState('');
   const auth = getAuth();
 
@@ -37,7 +37,7 @@ const Sendmessage = () => {
     }
   };
 
-  return (
+  return ( <>
     <form onSubmit={onSubmit}>
       <label htmlFor="sendmsg" hidden>
         Enter Message
@@ -51,8 +51,13 @@ const Sendmessage = () => {
         placeholder="Type your message"
         onChange={onChange}
       />
+
       <button type="submit">Send</button>
-    </form>
+\
+    </form> <span ref={scroll}></span>
+
+    
+    </>
   );
 };
 

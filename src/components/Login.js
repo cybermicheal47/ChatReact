@@ -86,12 +86,12 @@ const onSubmit = async  (e) => {
         </div>
         <Oauth />
 
-        <Link to="/forgotpassword"  >
-                                    Forgotpassword
+        <Link to="/forgotpassword" className="button-link redcolor"  >
+                                    Forgotpassword ?
                                 </Link>
                                 <br/>
 
-        <Link to="/signup"  >
+        <Link to="/signup"  className="button-link" >
                                     Don't have an account? Sign Up
                                 </Link>
 

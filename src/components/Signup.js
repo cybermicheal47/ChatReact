@@ -103,7 +103,7 @@ await setDoc(doc(db, 'users', user.uid), formdatacopy)
           </form>
         </div>
 
-        <Link  to='/'  >
+        <Link  to='/login' className="button-link"  >
                                     Already have an account? Sign in
                                 </Link>
 

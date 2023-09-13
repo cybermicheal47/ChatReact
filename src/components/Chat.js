@@ -11,10 +11,12 @@ import Sendmessage from "./Sendmessage";
 import Message from "./Message";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
+import ScrollIntoView from 'react-scroll-into-view';
+
 
 function Chat() {
   const [messages, setMessages] = useState([]);
-  const scroll = useRef();
+  const scroll = useRef(null);
   const auth = getAuth();
   const [user] = useAuthState(auth); // Get the authenticated user
 
@@ -31,13 +33,20 @@ console.log("QuerySnapshot:", QuerySnapshot);
 
       const sortmsg = fetchedmessages.sort((a, b) => a.createdAt - b.createdAt);
       setMessages(sortmsg);
+    
+
+
+      
     });
+ 
+
+
     return () => changesondoc;
   }, []);
 
   return (
     <>
-      <main className="chat-box">
+      <main className="chat-box "  ref={scroll}>
         <div className="messages-wrapper">
         {messages?.map((message) => (
   <div className={`chat-bubble ${message.uid === user?.uid ? 'right' : ''}`} key={message.id}>
@@ -52,8 +61,10 @@ console.log("QuerySnapshot:", QuerySnapshot);
 
 
         </div>
+        <span ref={scroll}></span>
         {/* when a new message enters the chat, the screen scrolls down to the scroll div */}
         <Sendmessage scroll={scroll} />
+
       </main>
     </>
   );
