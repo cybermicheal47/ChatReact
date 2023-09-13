@@ -4,6 +4,7 @@ import { Link ,  useNavigate} from 'react-router-dom';
 import { useState } from "react"
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { toast} from 'react-toastify'
+import Oauth from './Oauth';
 function Login() {
 
 const[formdata, setformdata] = useState({
@@ -80,8 +81,10 @@ const onSubmit = async  (e) => {
 
             <div><button type="submit">Login</button></div>
           </form>
+        
+        
         </div>
-
+        <Oauth />
 
         <Link to="/forgotpassword"  >
                                     Forgotpassword
@@ -91,7 +94,7 @@ const onSubmit = async  (e) => {
         <Link to="/signup"  >
                                     Don't have an account? Sign Up
                                 </Link>
-        
+
       </div>
    
   );

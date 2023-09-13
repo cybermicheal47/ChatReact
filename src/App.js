@@ -11,6 +11,7 @@ import {ToastContainer} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import  Privateroute from './components/Privateroute';
 
+
 function App() {
   return (
   <>
@@ -29,6 +30,7 @@ function App() {
 			/>
 			<Route path='/forgotpassword' element={<Forgotpassword/>}  
 			/>
+      
 
 <Route path='/profile' element={<Privateroute/>}>  
 

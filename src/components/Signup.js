@@ -8,6 +8,7 @@ import { setDoc,doc, serverTimestamp  } from 'firebase/firestore';
 import {db} from '../Firebase.config'
 
 import { toast} from 'react-toastify'
+import Oauth from './Oauth';
 
 
 function Signup() {
@@ -105,6 +106,8 @@ await setDoc(doc(db, 'users', user.uid), formdatacopy)
         <Link  to='/'  >
                                     Already have an account? Sign in
                                 </Link>
+
+                                <Oauth />
       </div>
    
   );
