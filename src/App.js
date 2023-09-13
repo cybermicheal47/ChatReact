@@ -22,8 +22,8 @@ function App() {
 <Route path='/signup' element={<Signup/>}  
 			/>
 
-<Route path='/chat' element={<Chat/>}  
-			/>
+<Route path='/chat' element={<Chat/>} />
+
       <Route path='/' element={<Hompage/>}  
 			/>
       <Route path='/login' element={<Login/>}  
@@ -36,6 +36,14 @@ function App() {
 
 <Route path='/profile' element={<Profile/>}  
 			/>
+      
+			</Route>
+
+      <Route path='/chat' element={<Privateroute/>}>  
+
+
+      <Route path='/chat' element={<Chat/>} />
+      
 			</Route>
      
  
